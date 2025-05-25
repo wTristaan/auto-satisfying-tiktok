@@ -1,4 +1,4 @@
-import pygame,sys,os
+import pygame,os
  
 class VideoRecorder:
     def __init__(self):
