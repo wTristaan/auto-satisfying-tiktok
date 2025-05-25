@@ -14,8 +14,6 @@ Auto-Satisfying-TikTok is a tool that creates satisfying videos using Pygame to 
 - Generate videos in 720x1080 at 60 FPS
 - Auto-upload to TikTok, YouTube, and Dailymotion
 
-Sure, here is the revised "Requirements" section for your README file in Markdown format:
-
 ## Requirements
 
 - Python 3.8 or higher
