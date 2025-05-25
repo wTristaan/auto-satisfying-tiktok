@@ -58,6 +58,7 @@ The `config.json` file contains the configuration parameters for the program. He
 
 This project is inspired by and builds upon the work of [Krokmouuu](https://github.com/Krokmouuu) and their [bouncing-balls](https://github.com/Krokmouuu/bouncing-balls) project. We extend our gratitude for the foundational work that contributed to the development of Auto-Satisfying-TikTok.
 
+Special thanks to [DubiousCode](https://pastebin.com/W5ZsTuET) providing the autorecorder setup used to record the Pygame portion of the project.
 
 ## Contribution
 

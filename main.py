@@ -4,8 +4,10 @@ import random
 from utils.ball import Ball
 from utils.utils import generate_circles
 from utils.params import FPS, TOTAL_FRAMES, COLORS
+from auto_recorder.video_recorder import VideoRecorder
 
 pygame.init()
+recorder = VideoRecorder()
 
 screen = pygame.display.set_mode((720, 680))
 clock = pygame.time.Clock()
@@ -56,5 +58,7 @@ for i in range(TOTAL_FRAMES):
         ball.trail_positions.pop()
 
     pygame.display.update()
+    recorder.make_png(screen)
 
 pygame.quit()
+recorder.make_mp4()
