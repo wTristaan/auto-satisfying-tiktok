@@ -1,4 +1,5 @@
-import pygame,os
+import os
+import pygame
  
 class VideoRecorder:
     def __init__(self):
@@ -17,10 +18,6 @@ class VideoRecorder:
         self.frame += 1
         fullpath = self.path + "\\" + self.name + "%08d.png"%self.frame
         pygame.image.save(screen, fullpath)
- 
-
-    def make_mp4(self):
-        os.system(f"ffmpeg -r 60 -i {os.path.join(self.path, f"{self.name}%08d.png")} -vcodec mpeg4 -q:v 0 -y videos/pygame.mp4")
 
     def clear_screenshots(self):
         for (dirpath, dirnames, filenames) in os.walk(self.path):

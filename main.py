@@ -1,13 +1,24 @@
+import time
 import pygame
 import random
 
+from tqdm import tqdm
 from utils.ball import Ball
+from videos.video import Video
+from rich.console import Console
+from twitch.api import TwitchAPI
 from utils.utils import generate_circles
-from utils.params import FPS, TOTAL_FRAMES, COLORS
 from auto_recorder.video_recorder import VideoRecorder
+from utils.params import FPS, TOTAL_FRAMES, COLORS, CLIENT_ID, CLIENT_SECRET
 
+console = Console()
 pygame.init()
+console.log("Pygame initialized.")
+
 recorder = VideoRecorder()
+twitch = TwitchAPI(CLIENT_ID, CLIENT_SECRET, console)
+video = Video(console)
+video.make_twitch_mp4()
 
 screen = pygame.display.set_mode((720, 680))
 clock = pygame.time.Clock()
@@ -19,8 +30,9 @@ next_circle_index = 20
 circles_to_remove = []
 base_circle = circles[0]
 
-
-for i in range(TOTAL_FRAMES):
+time.sleep(1)
+console.log("Making pygame video.")
+for i in tqdm(range(TOTAL_FRAMES)):
     screen.fill((0, 0, 0))
     clock.tick(FPS)
 
@@ -61,4 +73,6 @@ for i in range(TOTAL_FRAMES):
     recorder.make_png(screen)
 
 pygame.quit()
-recorder.make_mp4()
+video.make_pygame_mp4()
+console.log("Pygame video done.")
+video.make_full_video()

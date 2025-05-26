@@ -56,6 +56,28 @@ FFmpeg is required for video processing. You can download and install it from [F
    ```
 3. Verify the installation by typing `ffmpeg -version` in the terminal.
 
+### Twitch API Credentials
+
+To interact with the Twitch API, you need to set up a `.env` file at the root of the project with your Twitch API credentials. This file should include your `CLIENT_ID` and `CLIENT_SECRET`.
+
+1. Create a `.env` file in the root directory of the project:
+
+   ```plaintext
+   CLIENT_ID=your_client_id_here
+   CLIENT_SECRET=your_client_secret_here
+   ```
+
+2. Obtain your Twitch API credentials:
+   - Go to the [Twitch Developer Console](https://dev.twitch.tv/console).
+   - Register a new application by clicking on "Register Your Application".
+   - Fill in the required details such as the name of your application and the redirect URI (you can use `http://localhost` for local development).
+   - Once registered, you will find your `CLIENT_ID` on the application's dashboard.
+   - Generate a `CLIENT_SECRET` by clicking on "New Secret" and securely store it.
+
+3. Add the credentials to your `.env` file as shown above.
+
+Ensure that you keep your `.env` file secure and do not share it publicly, as it contains sensitive information.
+
 ## Installation
 
 1. Clone the repository:
@@ -87,10 +109,6 @@ FFmpeg is required for video processing. You can download and install it from [F
    ```
 
 3. The program will automatically generate the video and upload it to the specified platforms.
-
-## Configuration
-
-The `config.json` file contains the configuration parameters for the program. Here is an example configuration:
 
 ## Credits
 
