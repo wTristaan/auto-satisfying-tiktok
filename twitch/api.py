@@ -74,14 +74,21 @@ class TwitchAPI():
         clips = random.sample(clips, 10)
         all_duration = 0
         for i, clip in enumerate(clips):
+            all_duration += clip["duration"]
+            clip_title = ""
+            try:
+                clip["title"].encode('utf-8')
+                clip_title = clip["title"].replace(" ", "_") + ".mp4"
+            except:
+                clip_title = f'clip{i}.mp4'
+
             subprocess.run(
                 ["twitch-dl", "download", 
                  "-q", "720p", 
-                 "--output", os.path.join(self.clips_path, f'clip{i}.mp4'),
+                 "--output", os.path.join(self.clips_path, clip_title),
                  f"{clip["id"]}"],
                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
             )
-            if all_duration > 60:
+            if all_duration > 90:
                 self.rich_console.log("Downloading twitch clips done.")
                 break
-            all_duration += clip["duration"]

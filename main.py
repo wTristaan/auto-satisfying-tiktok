@@ -1,6 +1,7 @@
 import time
 import pygame
 import random
+import warnings
 
 from tqdm import tqdm
 from utils.ball import Ball
@@ -10,6 +11,8 @@ from twitch.api import TwitchAPI
 from utils.utils import generate_circles
 from auto_recorder.video_recorder import VideoRecorder
 from utils.params import FPS, TOTAL_FRAMES, COLORS, CLIENT_ID, CLIENT_SECRET
+
+warnings.filterwarnings("ignore")
 
 console = Console()
 pygame.init()

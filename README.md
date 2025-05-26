@@ -18,6 +18,7 @@ Auto-Satisfying-TikTok is a tool that creates satisfying videos using Pygame to 
 
 - Python 3.8 or higher
 - FFmpeg (required for video processing)
+- Twitch account
 
 ### Installing FFmpeg
 
