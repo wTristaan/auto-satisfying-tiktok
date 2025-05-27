@@ -74,7 +74,6 @@ class TwitchAPI():
         clips = random.sample(clips, 10)
         all_duration = 0
         for i, clip in enumerate(clips):
-            all_duration += clip["duration"]
             clip_title = ""
             try:
                 clip["title"].encode('utf-8')
@@ -92,3 +91,4 @@ class TwitchAPI():
             if all_duration > 90:
                 self.rich_console.log("Downloading twitch clips done.")
                 break
+            all_duration += clip["duration"]

@@ -1,6 +1,7 @@
 import os
 import subprocess
 
+from upload.upload import Upload
 from moviepy import VideoFileClip, concatenate_videoclips, clips_array
 
 
@@ -57,3 +58,9 @@ class Video():
         compined = clips_array([[twitch_video], [pygame_video]])
         compined.write_videofile(self.full_video_path, fps=60, logger=None)
         self.rich_console.log("Making full video done.")
+
+    def uploads(self):
+        up = Upload(self.full_video_path, self.rich_console)
+        up.tiktok()
+        up.youtube()
+        up.daylimotion()

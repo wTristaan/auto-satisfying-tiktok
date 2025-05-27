@@ -79,6 +79,44 @@ To interact with the Twitch API, you need to set up a `.env` file at the root of
 
 Ensure that you keep your `.env` file secure and do not share it publicly, as it contains sensitive information.
 
+### Platform Upload Credentials
+
+#### TikTok
+
+To upload videos to TikTok, you need to authenticate using your browser's cookies. This method is used due to TikTok's stricter stance on authentication by a Selenium-controlled browser.
+
+1. Install the [Get cookies.txt LOCALLY](https://github.com/kairi003/Get-cookies.txt-LOCALLY) extension for your browser.
+
+2. Navigate to [TikTok Studio](https://www.tiktok.com/tiktokstudio) and log in to your account.
+
+3. Open the extension by clicking on its icon in the browser's extension menu.
+
+4. Click on "Export As" and save the cookies file as `cookies.txt`.
+
+5. Place the `cookies.txt` file in the `utils` directory of the project. This file will be used to authenticate your session.
+
+#### YouTube and Dailymotion
+
+To upload videos to YouTube and Dailymotion, you need to provide login credentials for each platform. The program uses Selenium for authentication, which requires a simple account with an email and password. **Note:** Two-factor authentication is not supported.
+
+1. Create or use an existing account on each platform (YouTube, Dailymotion) with just an email and password.
+
+2. Add the credentials to your `.env` file at the root of the project. The `.env` file should include the following variables:
+
+   ```plaintext
+   YOUTUBE_EMAIL=your_youtube_email_here
+   YOUTUBE_PASSWORD=your_youtube_password_here
+   DAILYMOTION_EMAIL=your_dailymotion_email_here
+   DAILYMOTION_PASSWORD=your_dailymotion_password_here
+   ```
+
+3. Ensure that your `.env` file is kept secure and not shared publicly, as it contains sensitive login information.
+
+### Important Notes
+
+- **Security:** Avoid using accounts with sensitive information or those that have two-factor authentication enabled, as Selenium cannot handle two-factor authentication processes.
+- **Account Safety:** It is recommended to use separate accounts for automation purposes to avoid potential security risks to your primary accounts.
+
 ## Installation
 
 1. Clone the repository:
@@ -124,3 +162,7 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for more details.
+
+## Result video 
+
+![video generate](videos/result.gif)
