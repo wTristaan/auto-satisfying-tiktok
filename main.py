@@ -19,7 +19,7 @@ pygame.init()
 console.log("Pygame initialized.")
 
 recorder = VideoRecorder()
-twitch = TwitchAPI(CLIENT_ID, CLIENT_SECRET, console)
+twitch = TwitchAPI(CLIENT_ID, CLIENT_SECRET, console, "en")
 video = Video(console)
 time.sleep(1)
 video.make_twitch_mp4()

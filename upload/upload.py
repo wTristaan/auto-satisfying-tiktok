@@ -5,7 +5,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from tiktok_uploader.upload import upload_video
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from utils.params import YOUTUBE_EMAIL, YOUTUBE_PASSWORD, DAILYMOTION_EMAIL, DAILYMOTION_PASSWORD
@@ -33,13 +32,10 @@ class Upload():
         try:
             self.rich_console.log("Uploading video to youtube.")
             
-            options = Options()
-            # options.add_argument('--headless')
-            # options.add_argument('--window-size=1920,1080')
-            # user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
-            # options.add_argument(f'user-agent={user_agent}')
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.add_argument("--start-maximized")
             
-            driver = webdriver.Chrome(options=options)
+            driver = webdriver.Chrome(options=chrome_options)
             driver.get("https://studio.youtube.com")
             time.sleep(10)
 
@@ -97,13 +93,10 @@ class Upload():
         try:
             self.rich_console.log("Uploading video to dailymotion.")
 
-            options = Options()
-            # options.add_argument('--headless')
-            # options.add_argument('--window-size=1920,1080')
-            # user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'
-            # options.add_argument(f'user-agent={user_agent}')
-
-            driver = webdriver.Chrome(options=options)
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.add_argument("--start-maximized")
+            
+            driver = webdriver.Chrome(options=chrome_options)
             driver.get("https://www.dailymotion.com/fr")
             time.sleep(10)
 

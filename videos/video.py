@@ -1,4 +1,5 @@
 import os
+import random
 import subprocess
 
 from upload.upload import Upload
@@ -56,7 +57,15 @@ class Video():
         if twitch_video.duration > pygame_video.duration:
             twitch_video = twitch_video.with_duration(pygame_video.duration)
         compined = clips_array([[twitch_video], [pygame_video]])
-        compined.write_videofile(self.full_video_path, fps=60, logger=None)
+        compined.write_videofile(self.full_video_path.replace(".mp4", "_1_.mp4"), fps=60, logger=None)
+
+        self.rich_console.log("Adding hook on full video.")
+        number_hook = random.randint(1, 17)
+        video = VideoFileClip(self.full_video_path.replace(".mp4", "_1_.mp4"))
+        hook = VideoFileClip(f"videos/hooks/{number_hook}.mp4") 
+        hook = hook.resized((720, 1080))             
+        video = concatenate_videoclips([hook, video], method="compose")
+        video.write_videofile(self.full_video_path, fps=60, logger=None)
         self.rich_console.log("Making full video done.")
 
     def uploads(self):

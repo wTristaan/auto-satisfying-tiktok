@@ -6,13 +6,14 @@ import subprocess
 from datetime import datetime, timedelta
 
 class TwitchAPI():
-    def __init__(self, client_id, client_secret, rich_console):
+    def __init__(self, client_id, client_secret, rich_console, language):
         self.headers = None
         self.clips_path = os.path.join(os.path.abspath("."), "twitch", "clips")
         self.rich_console = rich_console
         
         self.__auth(client_id, client_secret)
         self.just_chatting_id = self.get_just_chatting_id()
+        self.language = language
 
         try:
             os.makedirs(self.clips_path)
@@ -59,7 +60,7 @@ class TwitchAPI():
         return 0
     
     def get_clips(self):
-        self.rich_console.log("Downloading twitch clips.")
+        self.rich_console.log(f"Downloading {self.language} twitch clips.")
         url = 'https://api.twitch.tv/helix/clips'
         yesterday = datetime.now() - timedelta(days=1)
         started_at = yesterday.strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -67,11 +68,28 @@ class TwitchAPI():
         params = {
             "game_id": self.just_chatting_id,
             "started_at": started_at,
-            "ended_at": ended_at
+            "ended_at": ended_at,
+            "first": 100
         }
-        response = requests.get(url, params=params, headers=self.headers)
-        clips = sorted(response.json()['data'], key=lambda x: x['view_count'], reverse=True)
-        clips = random.sample(clips, 10)
+
+        language_clips = []
+        cursor = None
+
+        while len(language_clips) < 100:
+            if cursor:
+                params['after'] = cursor
+            response = requests.get(url, params=params, headers=self.headers)
+            clips = response.json()['data']
+            language_clips.extend(clip for clip in clips if clip.get('language') == self.language)
+            cursor = response.json().get('pagination', {}).get('cursor')
+            if not cursor:
+                break
+
+        if len(language_clips) < 10:
+            self.rich_console.log(f"Not enough {self.language} clips found.")
+            return
+
+        clips = random.sample(language_clips, 10)
         all_duration = 0
         for i, clip in enumerate(clips):
             clip_title = ""
@@ -82,13 +100,13 @@ class TwitchAPI():
                 clip_title = f'clip{i}.mp4'
 
             subprocess.run(
-                ["twitch-dl", "download", 
-                 "-q", "720p", 
-                 "--output", os.path.join(self.clips_path, clip_title),
-                 f"{clip["id"]}"],
+                ["twitch-dl", "download",
+                "-q", "720p",
+                "--output", os.path.join(self.clips_path, clip_title),
+                f"{clip["id"]}"],
                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
             )
             if all_duration > 90:
-                self.rich_console.log("Downloading twitch clips done.")
+                self.rich_console.log(f"Downloading {self.language} twitch clips done.")
                 break
             all_duration += clip["duration"]
