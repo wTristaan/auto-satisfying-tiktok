@@ -86,10 +86,10 @@ class TwitchAPI():
                 break
 
         if len(language_clips) < 10:
-            self.rich_console.log(f"Not enough {self.language} clips found.")
-            return
-
-        clips = random.sample(language_clips, 10)
+            clips = random.sample(language_clips, len(language_clips))
+        else:
+            clips = random.sample(language_clips, 10)
+            
         all_duration = 0
         for i, clip in enumerate(clips):
             clip_title = ""
