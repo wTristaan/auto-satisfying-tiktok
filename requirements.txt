@@ -7,6 +7,4 @@ tqdm=4.67.1
 moviepy=2.2.1
 selenium==4.33.0
 tiktok-uploader==1.1.1
-
-
-
+dailymotion==0.2.5

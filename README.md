@@ -95,22 +95,47 @@ To upload videos to TikTok, you need to authenticate using your browser's cookie
 
 5. Place the `cookies.txt` file in the `utils` directory of the project. This file will be used to authenticate your session.
 
-#### YouTube and Dailymotion
 
-To upload videos to YouTube and Dailymotion, you need to provide login credentials for each platform. The program uses Selenium for authentication, which requires a simple account with an email and password. **Note:** Two-factor authentication is not supported.
+#### YouTube
 
-1. Create or use an existing account on each platform (YouTube, Dailymotion) with just an email and password.
+To upload videos to YouTube, you need to provide login credentials for each platform. The program uses Selenium for authentication, which requires a simple account with an email and password. **Note:** Two-factor authentication is not supported.
+
+1. Create or use an existing account on each platform YouTube with just an email and password.
 
 2. Add the credentials to your `.env` file at the root of the project. The `.env` file should include the following variables:
 
    ```plaintext
    YOUTUBE_EMAIL=your_youtube_email_here
    YOUTUBE_PASSWORD=your_youtube_password_here
-   DAILYMOTION_EMAIL=your_dailymotion_email_here
-   DAILYMOTION_PASSWORD=your_dailymotion_password_here
    ```
 
-3. Ensure that your `.env` file is kept secure and not shared publicly, as it contains sensitive login information.
+### Dailymotion API Credentials
+
+To upload videos to Dailymotion using their API, you need to set up a `.env` file at the root of the project with your Dailymotion API credentials. This file should include your `DAILYMOTION_EMAIL`, `DAILYMOTION_PASSWORD`, `DAILYMOTION_API_KEY`, `DAILYMOTION_API_SECRET`, and `DAILYMOTION_ID`.
+
+1. Create a `.env` file in the root directory of the project:
+
+   ```plaintext
+   DAILYMOTION_EMAIL=your_dailymotion_email_here
+   DAILYMOTION_PASSWORD=your_dailymotion_password_here
+   DAILYMOTION_API_KEY=your_dailymotion_api_key_here
+   DAILYMOTION_API_SECRET=your_dailymotion_api_secret_here
+   DAILYMOTION_ID=your_dailymotion_id_here
+   ```
+
+2. Obtain your Dailymotion API credentials:
+   - Go to the [Dailymotion Partner Portal](https://www.dailymotion.com/partner/).
+   - You need to be a partner to create an API key. If you are not already a partner, you will need to apply for the partnership.
+   - Once you are a partner, navigate to the API section to create a new API key.
+   - Generate your `DAILYMOTION_API_KEY` and `DAILYMOTION_API_SECRET` and securely store them.
+
+3. Obtain your `DAILYMOTION_ID`:
+   - Log in to the [Dailymotion Partner Portal](https://www.dailymotion.com/partner/).
+   - The `DAILYMOTION_ID` can be found in the URL when you are logged in. It is typically a part of the URL path after logging in.
+
+4. Add the credentials to your `.env` file as shown above.
+
+Ensure that you keep your `.env` file secure and do not share it publicly, as it contains sensitive information.
 
 ### Important Notes
 
@@ -139,7 +164,7 @@ To upload videos to YouTube and Dailymotion, you need to provide login credentia
 
 ## Usage
 
-1. Configure the necessary parameters in the `config.json` file.
+1. Configure the necessary parameters in the `.env` file.
 
 2. Run the main script:
 

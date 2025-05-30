@@ -7,7 +7,8 @@ from selenium.webdriver.common.keys import Keys
 from tiktok_uploader.upload import upload_video
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from utils.params import YOUTUBE_EMAIL, YOUTUBE_PASSWORD, DAILYMOTION_EMAIL, DAILYMOTION_PASSWORD
+from utils.params import YOUTUBE_EMAIL, YOUTUBE_PASSWORD, DAILYMOTION_EMAIL, DAILYMOTION_PASSWORD, DAILYMOTION_API_KEY, DAILYMOTION_API_SECRET, DAILYMOTION_ID
+from dailymotion_app.api import Dailymotion
 
 
 class Upload():
@@ -92,87 +93,14 @@ class Upload():
     def daylimotion(self):
         try:
             self.rich_console.log("Uploading video to dailymotion.")
-
-            chrome_options = webdriver.ChromeOptions()
-            chrome_options.add_argument("--start-maximized")
-            
-            driver = webdriver.Chrome(options=chrome_options)
-            driver.get("https://www.dailymotion.com/fr")
-            time.sleep(10)
-
-            WebDriverWait(driver, 5).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH, "//*[@id='sp_message_iframe_1288283']")))
-            driver.find_element(By.XPATH, "//*[@id='notice']/div[5]/button[2]").click()
-            driver.switch_to.default_content()
-            time.sleep(5)
-
-            driver.find_element(By.XPATH, "//*[@id='root']/div/header/div/div[3]/div[3]/button").click()
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, "//*[@id='signin-form']/label[1]/input").send_keys(DAILYMOTION_EMAIL)
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, " //*[@id='signin-form']/label[2]/input").send_keys(DAILYMOTION_PASSWORD)
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, "//*[@id='portal-root']/div/div/div[2]/div[2]/div[3]/button").click()
-            time.sleep(5)
-
-            driver.find_element(By.XPATH, "//*[@id='root']/div/header/div/div[3]/div[2]/button").click()
-            time.sleep(2)
-            
-            driver.switch_to.window(driver.window_handles[1])
-            time.sleep(10)
-
-            driver.find_element(By.XPATH, "//*[@id='react-root']/div[2]/div/div/button[2]").click()
-            time.sleep(2)
-            
-            inputs = driver.find_elements(By.TAG_NAME, "input")
-            inputs[-1].send_keys(os.path.abspath(self.video_path))
-            time.sleep(10)
-
-            input_title = driver.find_element(By.XPATH, "//*[@id='title']")
-            input_title.send_keys(Keys.CONTROL + "a")
-            input_title.send_keys(Keys.DELETE)
-            time.sleep(2)
-
-
-            input_title.send_keys(self.full_title)
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, "//*[@id='description']").send_keys(self.tags)
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, "//*[@id='channel']").click()
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div/div[2]/div[1]/div/div/div[7]").click()
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, "//*[@id='react-root']/div[2]/div/div[3]/div/div/div[3]/div/div[3]/button").click()
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, "//*[@id='react-root']/div[2]/div/div[3]/div/div/div[3]/div/div[3]/button").click()
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, "//*[@id='react-root']/div[2]/div/div[3]/div/div/div[3]/div/div[3]/button").click()
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, "//*[@id='react-root']/div[2]/div/div[3]/div/div/div[3]/div/div/button").click()
-            time.sleep(120)
-
-            driver.find_element(By.XPATH, "//*[@id='react-root']/div/div/main/div/div/div/div/div/ul/li/div/div[2]/div/div/button").click()
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, "/html/body/div[2]/div/div/ul/li[1]").click()
-            time.sleep(5)
-
-            driver.find_element(By.XPATH, "//*[@id='tags']").send_keys(self.tags.replace(" ", ", "))
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, "//*[@id='scrollable']/span/button").click()
-            time.sleep(10)
-
-            driver.quit()
+            Dailymotion(
+                DAILYMOTION_EMAIL, 
+                DAILYMOTION_PASSWORD, 
+                DAILYMOTION_API_KEY, 
+                DAILYMOTION_API_SECRET, 
+                DAILYMOTION_ID,
+                self.video_path,
+            ).upload(self.full_title)
             self.rich_console.log("Upload video to dailymotion done.")
         except Exception as e:
             self.rich_console.log(f"Upload video to dailymotion error {str(e)}.")

@@ -22,4 +22,5 @@ class VideoRecorder:
     def clear_screenshots(self):
         for (dirpath, dirnames, filenames) in os.walk(self.path):
             for filename in filenames:
-                os.remove(os.path.join(dirpath, filename))
+                if filename.__contains__(".png"):
+                    os.remove(os.path.join(dirpath, filename))

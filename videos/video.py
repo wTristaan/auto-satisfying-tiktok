@@ -34,14 +34,14 @@ class Video():
         video_title = ""
         for (dirpath, dirnames, filenames) in os.walk(self.twitch_clips_path):
             for filename in filenames:
-                if not filename.startswith("clip"):
+                if filename.__contains__(".mp4"):
                     video_title = filename
                     if len(old_video_title) < len(video_title):
                         old_video_title = video_title
                         
-                clip_path = os.path.join(dirpath, filename)
-                video = VideoFileClip(clip_path)
-                twitch_clips.append(video.resized((720, 400)))            
+                    clip_path = os.path.join(dirpath, filename)
+                    video = VideoFileClip(clip_path)
+                    twitch_clips.append(video.resized((720, 400)))            
 
         self.twitch_video_path = f"videos/{video_title}"
         self.full_video_path = video_title

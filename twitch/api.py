@@ -26,7 +26,8 @@ class TwitchAPI():
     def clear_clips(self):
         for (dirpath, dirnames, filenames) in os.walk(self.clips_path):
             for filename in filenames:
-                os.remove(os.path.join(dirpath, filename))
+                if filename.__contains__(".mp4"):
+                    os.remove(os.path.join(dirpath, filename))
 
     def __auth(self, client_id, client_secret):
         headers = {
