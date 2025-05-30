@@ -6,4 +6,5 @@
 env/
 .env
 text.txt
-utils/cookies.txt
+utils/cookies_FR.txt
+utils/cookies_EN.txt

@@ -91,7 +91,7 @@ To upload videos to TikTok, you need to authenticate using your browser's cookie
 
 3. Open the extension by clicking on its icon in the browser's extension menu.
 
-4. Click on "Export As" and save the cookies file as `cookies.txt`.
+4. Click on "Export As" and save the cookies file as `cookies_EN.txt`.
 
 5. Place the `cookies.txt` file in the `utils` directory of the project. This file will be used to authenticate your session.
 

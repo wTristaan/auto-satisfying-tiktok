@@ -7,7 +7,7 @@ from moviepy import VideoFileClip, concatenate_videoclips, clips_array
 
 
 class Video():
-    def __init__(self, rich_console):
+    def __init__(self, rich_console, LANGUAGE):
         self.pygame_screens = os.path.join("auto_recorder", "screenshots")
         self.pygame_screen_name = "capture"
         self.rich_console = rich_console
@@ -15,6 +15,7 @@ class Video():
         self.pygame_video_path = os.path.join(os.path.abspath("."), "videos", "pygame.mp4")
         self.twitch_video_path = ""
         self.full_video_path = ""
+        self.LANGUAGE = LANGUAGE
 
     def make_pygame_mp4(self):
         subprocess.run([
@@ -30,14 +31,12 @@ class Video():
     def make_twitch_mp4(self):
         self.rich_console.log("Making twitch clips video.")
         twitch_clips = []
-        old_video_title = ""
         video_title = ""
-        for (dirpath, dirnames, filenames) in os.walk(self.twitch_clips_path):
+        for dirpath, dirnames, filenames in os.walk(self.twitch_clips_path):
             for filename in filenames:
-                if filename.__contains__(".mp4"):
-                    video_title = filename
-                    if len(old_video_title) < len(video_title):
-                        old_video_title = video_title
+                if filename.endswith(".mp4"):
+                    if len(filename) > len(video_title):
+                        video_title = filename
                         
                     clip_path = os.path.join(dirpath, filename)
                     video = VideoFileClip(clip_path)
@@ -69,7 +68,7 @@ class Video():
         self.rich_console.log("Making full video done.")
 
     def uploads(self):
-        up = Upload(self.full_video_path, self.rich_console)
+        up = Upload(self.full_video_path, self.rich_console, self.LANGUAGE)
         up.tiktok()
         up.youtube()
         up.daylimotion()

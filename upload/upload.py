@@ -12,18 +12,19 @@ from dailymotion_app.api import Dailymotion
 
 
 class Upload():
-    def __init__(self, video_to_upload_path, rich_console):
+    def __init__(self, video_to_upload_path, rich_console, LANGUAGE):
         self.video_path = video_to_upload_path
         self.title_video = self.video_path.replace("_", " ").replace(".mp4", "")
         self.tags = "#clip #twitch #funny #compilation #satisfyingvideo"
         self.full_title = f"{self.title_video} - Twitch clips compilation ! {self.tags}" 
         self.full_title_without_tags = f"{self.title_video} - Twitch clips compilation !" 
         self.rich_console = rich_console
+        self.LANGUAGE = LANGUAGE
 
     def tiktok(self):
         try:
             self.rich_console.log("Uploading video to tiktok.")
-            upload_video(self.video_path, self.full_title, cookies='utils/cookies.txt', headless=True)
+            upload_video(self.video_path, self.full_title, cookies=f'utils/cookies_{self.LANGUAGE.upper()}.txt', headless=True)
             self.rich_console.log("Upload video to tiktok done.")
         except Exception as e:
             self.rich_console.log(f"Upload video to tiktok error {str(e)}.")

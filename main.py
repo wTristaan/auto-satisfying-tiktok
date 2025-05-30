@@ -10,7 +10,7 @@ from rich.console import Console
 from twitch.api import TwitchAPI
 from utils.utils import generate_circles
 from auto_recorder.video_recorder import VideoRecorder
-from utils.params import FPS, TOTAL_FRAMES, COLORS, CLIENT_ID, CLIENT_SECRET
+from utils.params import FPS, TOTAL_FRAMES, COLORS, CLIENT_ID, CLIENT_SECRET, LANGUAGE
 
 warnings.filterwarnings("ignore")
 
@@ -19,8 +19,8 @@ pygame.init()
 console.log("Pygame initialized.")
 
 recorder = VideoRecorder()
-twitch = TwitchAPI(CLIENT_ID, CLIENT_SECRET, console, "fr")
-video = Video(console)
+twitch = TwitchAPI(CLIENT_ID, CLIENT_SECRET, console, LANGUAGE)
+video = Video(console, LANGUAGE)
 time.sleep(1)
 video.make_twitch_mp4()
 
