@@ -1,6 +1,8 @@
 **/__pycache__/
 **/*.png
 **/*.mp4
+**/*.log
+
 !videos/hooks/*.mp4
 
 env/
@@ -8,3 +10,6 @@ env/
 text.txt
 utils/cookies_FR.txt
 utils/cookies_EN.txt
+utils/token_EN.pickle
+utils/token_FR.pickle
+utils/yt_api.json

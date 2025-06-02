@@ -9,6 +9,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from utils.params import YOUTUBE_EMAIL, YOUTUBE_PASSWORD, DAILYMOTION_EMAIL, DAILYMOTION_PASSWORD, DAILYMOTION_API_KEY, DAILYMOTION_API_SECRET, DAILYMOTION_ID
 from dailymotion_app.api import Dailymotion
+from youtube_app.api import YTApi
 
 
 class Upload():
@@ -33,59 +34,8 @@ class Upload():
     def youtube(self):
         try:
             self.rich_console.log("Uploading video to youtube.")
-            
-            chrome_options = webdriver.ChromeOptions()
-            chrome_options.add_argument("--start-maximized")
-            
-            driver = webdriver.Chrome(options=chrome_options)
-            driver.get("https://studio.youtube.com")
-            time.sleep(10)
-
-            driver.find_element(By.XPATH, "//*[@id='identifierId']").send_keys(YOUTUBE_EMAIL)
-            driver.find_element(By.XPATH, "//*[@id='identifierNext']/div/button").click()
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, "//*[@id='password']/div[1]/div/div[1]/input").send_keys(YOUTUBE_PASSWORD)
-            driver.find_element(By.XPATH, "//*[@id='passwordNext']/div/button").click()
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, "//*[@id='create-icon']/ytcp-button-shape/button/yt-touch-feedback-shape/div/div[2]").click()
-            driver.find_element(By.XPATH, "//*[@id='text-item-0']").click()
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, "//*[@id='content']/input").send_keys(os.path.abspath(self.video_path))
-            time.sleep(10)
-
-            input_title = driver.find_element(By.XPATH, "//*[@id='textbox']")
-            input_title.clear()
-            if len(self.full_title_without_tags) > 100:
-                self.full_title_without_tags = self.full_title_without_tags[0: 90]
-            input_title.send_keys(self.full_title_without_tags)
-            time.sleep(2)
-
-            driver.find_elements(By.XPATH, "//*[@id='radioContainer']")[1].click()
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, "//*[@id='toggle-button']/ytcp-button-shape/button").click()
-            time.sleep(10)
-
-            driver.find_element(By.XPATH, "//*[@id='text-input']").send_keys(self.tags.replace(" ", ", "))
-            time.sleep(10)
-
-            driver.find_element(By.XPATH, "//*[@id='next-button']/ytcp-button-shape/button").click()
-            time.sleep(2)
-            driver.find_element(By.XPATH, "//*[@id='next-button']/ytcp-button-shape/button").click()
-            time.sleep(2)
-            driver.find_element(By.XPATH, "//*[@id='next-button']/ytcp-button-shape/button").click()
-            time.sleep(2)
-            
-            driver.find_elements(By.XPATH, "//*[@id='radioContainer']")[2].click()
-            time.sleep(2)
-
-            driver.find_element(By.XPATH, "//*[@id='done-button']/ytcp-button-shape/button").click()
-            time.sleep(10)
-
-            driver.quit()
+            youtube = YTApi()
+            youtube.upload(self.video_path, self.full_title_without_tags, self.tags, 24)
             self.rich_console.log("Upload video to youtube done.")
         except Exception as e:
             self.rich_console.log(f"Upload video to youtube error {str(e)}.")

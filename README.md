@@ -81,7 +81,7 @@ Ensure that you keep your `.env` file secure and do not share it publicly, as it
 
 ### Platform Upload Credentials
 
-#### TikTok
+### TikTok
 
 To upload videos to TikTok, you need to authenticate using your browser's cookies. This method is used due to TikTok's stricter stance on authentication by a Selenium-controlled browser.
 
@@ -96,18 +96,41 @@ To upload videos to TikTok, you need to authenticate using your browser's cookie
 5. Place the `cookies.txt` file in the `utils` directory of the project. This file will be used to authenticate your session.
 
 
-#### YouTube
+### YouTube API Credentials
 
-To upload videos to YouTube, you need to provide login credentials for each platform. The program uses Selenium for authentication, which requires a simple account with an email and password. **Note:** Two-factor authentication is not supported.
+To upload videos to YouTube using the YouTube Data API v3, you need to set up API credentials and authenticate with Google. Follow these steps to set up your project and obtain the necessary credentials:
 
-1. Create or use an existing account on each platform YouTube with just an email and password.
+1. **Go to the Google Developers Console:**
+   - Navigate to the [Google Developers Console](https://console.cloud.google.com/).
 
-2. Add the credentials to your `.env` file at the root of the project. The `.env` file should include the following variables:
+2. **Create a New Project:**
+   - Click on the project dropdown near the top left of the page.
+   - Select "New Project" and follow the prompts to create a new project.
 
-   ```plaintext
-   YOUTUBE_EMAIL=your_youtube_email_here
-   YOUTUBE_PASSWORD=your_youtube_password_here
-   ```
+3. **Enable the YouTube Data API v3:**
+   - In the Google Developers Console, go to the "Library" section.
+   - Search for "YouTube Data API v3" and select it.
+   - Click on the "Enable" button to enable the API for your project.
+
+4. **Create OAuth 2.0 Credentials:**
+   - Go to the "Credentials" section in the Google Developers Console.
+   - Click on "Create Credentials" and select "OAuth client ID."
+   - Choose "Desktop app" as the application type.
+   - Provide a name for your OAuth 2.0 client and click "Create."
+
+5. **Download the Credentials File:**
+   - After creating the OAuth 2.0 credentials, click on the download button to download the credentials as a JSON file.
+   - Rename the downloaded JSON file to `yt_api.json`.
+   - Place the `yt_api.json` file in the `utils` directory of the project.
+
+6. **Authenticate and Obtain the Token:**
+   - When you run the program for the first time, it will prompt you to authenticate with your Google account.
+   - Follow the authentication link provided in the console and log in with your Google account.
+   - After successful authentication, you will receive an authentication token. This token will be saved for future use, so you won't need to authenticate again for subsequent runs.
+
+Ensure that you keep your `yt_api.json` file secure and do not share it publicly, as it contains sensitive information.
+
+For more detailed instructions, you can refer to the [YouTube Data API v3 documentation](https://developers.google.com/youtube/v3/getting-started).
 
 ### Dailymotion API Credentials
 
