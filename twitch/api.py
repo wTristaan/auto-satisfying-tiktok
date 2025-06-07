@@ -1,4 +1,5 @@
 import os
+import emoji
 import random
 import requests
 import subprocess
@@ -22,6 +23,9 @@ class TwitchAPI():
 
         self.clear_clips()
         self.get_clips()
+
+    def remove_using_emoji(self, txt):
+        return emoji.replace_emoji(txt, '')
     
     def clear_clips(self):
         for (dirpath, dirnames, filenames) in os.walk(self.clips_path):
@@ -97,7 +101,9 @@ class TwitchAPI():
             try:
                 clip["title"].encode('utf-8')
                 clip_title = clip["title"].replace(" ", "_") + ".mp4"
-            except:
+                clip_title = self.remove_using_emoji(clip_title)
+            except Exception as e:
+                print(e)
                 clip_title = f'clip{i}.mp4'
 
             subprocess.run(

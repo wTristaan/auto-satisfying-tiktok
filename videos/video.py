@@ -3,6 +3,8 @@ import random
 import subprocess
 
 from upload.upload import Upload
+from utils.params import ASSEMBLY_API
+from subtitles.get_srt_from_video import Subtitle
 from moviepy import VideoFileClip, concatenate_videoclips, clips_array
 
 
@@ -64,8 +66,13 @@ class Video():
         hook = VideoFileClip(f"videos/hooks/{number_hook}.mp4") 
         hook = hook.resized((720, 1080))             
         video = concatenate_videoclips([hook, video], method="compose")
-        video.write_videofile(self.full_video_path, fps=60, logger=None)
+        video.write_videofile(self.full_video_path.replace(".mp4", "_2_.mp4"), fps=60, logger=None)
         self.rich_console.log("Making full video done.")
+
+        self.rich_console.log("Adding subtitles on full video.")
+        subtitle = Subtitle(ASSEMBLY_API, self.LANGUAGE)
+        subtitle.get_srt_from_video(self.full_video_path.replace(".mp4", "_2_.mp4"))
+        self.rich_console.log("Adding subtitles on full video done.")
 
     def uploads(self):
         up = Upload(self.full_video_path, self.rich_console, self.LANGUAGE)
