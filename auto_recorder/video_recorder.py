@@ -16,7 +16,7 @@ class VideoRecorder:
     
     def make_png(self, screen):
         self.frame += 1
-        fullpath = self.path + "\\" + self.name + "%08d.png"%self.frame
+        fullpath = self.path + "/" + self.name + "%08d.png"%self.frame
         pygame.image.save(screen, fullpath)
 
     def clear_screenshots(self):
