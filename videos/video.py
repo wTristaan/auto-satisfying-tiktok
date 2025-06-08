@@ -1,4 +1,5 @@
 import os
+import shutil
 import random
 import subprocess
 
@@ -34,15 +35,17 @@ class Video():
         self.rich_console.log("Making twitch clips video.")
         twitch_clips = []
         video_title = ""
+        index = 0
         for dirpath, dirnames, filenames in os.walk(self.twitch_clips_path):
             for filename in filenames:
                 if filename.endswith(".mp4"):
-                    if len(filename) > len(video_title):
+                    if index == 0:
                         video_title = filename
                         
                     clip_path = os.path.join(dirpath, filename)
                     video = VideoFileClip(clip_path)
-                    twitch_clips.append(video.resized((720, 400)))            
+                    twitch_clips.append(video.resized((720, 400)))  
+                    index += 1          
 
         self.twitch_video_path = f"videos/{video_title}"
         self.full_video_path = video_title
@@ -74,8 +77,20 @@ class Video():
         subtitle.get_srt_from_video(self.full_video_path.replace(".mp4", "_2_.mp4"))
         self.rich_console.log("Adding subtitles on full video done.")
 
+
     def uploads(self):
         up = Upload(self.full_video_path, self.rich_console, self.LANGUAGE)
         up.tiktok()
         up.youtube()
         up.daylimotion()
+
+        self.rich_console.log("Clearing video path.")
+        self.clear_videos()
+        self.rich_console.log("Clear video path done.")
+
+    def clear_videos(self):
+        os.remove(self.full_video_path.replace(".mp4", "_1_.mp4"))
+        os.remove(self.full_video_path.replace(".mp4", "_2_.mp4"))
+        os.remove(self.full_video_path.replace(".mp4", "_2_.mp4.srt"))
+        shutil.move(self.full_video_path, os.path.join("vv", self.full_video_path))
+

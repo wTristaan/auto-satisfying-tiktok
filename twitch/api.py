@@ -97,11 +97,13 @@ class TwitchAPI():
             
         all_duration = 0
         for i, clip in enumerate(clips):
-            clip_title = ""
+            clip_title = self.remove_using_emoji(clip["title"])
             try:
-                clip["title"].encode('utf-8')
-                clip_title = clip["title"].replace(" ", "_") + ".mp4"
-                clip_title = self.remove_using_emoji(clip_title)
+                if clip_title != "":
+                    clip_title.encode('utf-8')
+                    clip_title = clip_title.replace(" ", "_") + ".mp4"
+                else:
+                    clip_title = "unknown.mp4"
             except Exception as e:
                 print(e)
                 clip_title = f'clip{i}.mp4'
