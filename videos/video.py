@@ -92,5 +92,5 @@ class Video():
         os.remove(self.full_video_path.replace(".mp4", "_1_.mp4"))
         os.remove(self.full_video_path.replace(".mp4", "_2_.mp4"))
         os.remove(self.full_video_path.replace(".mp4", "_2_.mp4.srt"))
-        shutil.move(self.full_video_path, os.path.join("vv", self.full_video_path))
+        shutil.move(self.full_video_path, os.path.join("full_videos", self.full_video_path))
 
