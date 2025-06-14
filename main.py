@@ -24,7 +24,7 @@ video = Video(console, LANGUAGE)
 time.sleep(1)
 video.make_twitch_mp4()
 
-screen = pygame.display.set_mode((720, 680))
+screen = pygame.display.set_mode((1080, 1280), pygame.RESIZABLE)
 clock = pygame.time.Clock()
 ball_color = random.choice(list(COLORS.values()))
 ball = Ball(color=ball_color, velocity_x=random.uniform(-5, 5), velocity_y=random.uniform(-5, 5))

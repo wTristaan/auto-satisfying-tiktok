@@ -5,13 +5,13 @@ A Python program to automatically generate satisfying videos for TikTok, YouTube
 
 ## Description
 
-Auto-Satisfying-TikTok is a tool that creates satisfying videos using Pygame to animate a ball trying to escape from multiple circles. The program also overlays the most viewed Twitch clip from the previous day, then generates a video in 720x1080 at 60 FPS that auto-uploads to TikTok, YouTube, and Dailymotion.
+Auto-Satisfying-TikTok is a tool that creates satisfying videos using Pygame to animate a ball trying to escape from multiple circles. The program also overlays the most viewed Twitch clip from the previous day, then generates a video in 1080x1920 at 60 FPS that auto-uploads to TikTok, YouTube, and Dailymotion.
 
 ## Features
 
 - Generate satisfying videos with Pygame
 - Integrate the most viewed Twitch clip from the previous day
-- Generate videos in 720x1080 at 60 FPS
+- Generate videos in 1080x1920 at 60 FPS
 - Auto-upload to TikTok, YouTube, and Dailymotion
 
 ## Requirements

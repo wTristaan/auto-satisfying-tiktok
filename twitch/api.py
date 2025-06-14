@@ -110,7 +110,7 @@ class TwitchAPI():
 
             subprocess.run(
                 ["twitch-dl", "download",
-                "-q", "720p",
+                "-q", "1080p",
                 "--output", os.path.join(self.clips_path, clip_title),
                 f"{clip["id"]}"],
                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL

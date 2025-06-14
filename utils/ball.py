@@ -94,18 +94,18 @@ class Ball:
         self.x += self.velocity_x
         self.y += self.velocity_y
 
-        if self.x - self.radius < 0 or self.x + self.radius > 720:
+        if self.x - self.radius < 0 or self.x + self.radius > 1080:
             self.velocity_x = -self.velocity_x
-            self.x = max(self.radius, min(720 - self.radius, self.x))
+            self.x = max(self.radius, min(1080 - self.radius, self.x))
 
-        if self.y - self.radius < 0 or self.y + self.radius > 680:
+        if self.y - self.radius < 0 or self.y + self.radius > 1280:
             self.velocity_y = -self.velocity_y
-            self.y = max(self.radius, min(680 - self.radius, self.y))
+            self.y = max(self.radius, min(1280 - self.radius, self.y))
 
-        if self.x - self.radius < 0 or self.x + self.radius > 720:
+        if self.x - self.radius < 0 or self.x + self.radius > 1080:
             self.velocity_x = -self.velocity_x
-            self.x = max(self.radius, min(720 - self.radius, self.x))
+            self.x = max(self.radius, min(1080 - self.radius, self.x))
 
-        if self.y - self.radius < 0 or self.y + self.radius > 680:
+        if self.y - self.radius < 0 or self.y + self.radius > 1280:
             self.velocity_y = -self.velocity_y
-            self.y = max(self.radius, min(680 - self.radius, self.y))
+            self.y = max(self.radius, min(1280 - self.radius, self.y))

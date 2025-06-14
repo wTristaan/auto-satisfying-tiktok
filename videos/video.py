@@ -15,7 +15,7 @@ class Video():
         self.pygame_screen_name = "capture"
         self.rich_console = rich_console
         self.twitch_clips_path = os.path.join("twitch", "clips")
-        self.pygame_video_path = os.path.join(os.path.abspath("."), "videos", "pygame.mp4")
+        self.pygame_video_path = os.path.join("videos", "pygame.mp4")
         self.twitch_video_path = ""
         self.full_video_path = ""
         self.LANGUAGE = LANGUAGE
@@ -44,7 +44,7 @@ class Video():
                         
                     clip_path = os.path.join(dirpath, filename)
                     video = VideoFileClip(clip_path)
-                    twitch_clips.append(video.resized((720, 400)))  
+                    twitch_clips.append(video.resized((1080, 640)))  
                     index += 1          
 
         self.twitch_video_path = f"videos/{video_title}"
@@ -67,7 +67,7 @@ class Video():
         number_hook = random.randint(1, 17)
         video = VideoFileClip(self.full_video_path.replace(".mp4", "_1_.mp4"))
         hook = VideoFileClip(f"videos/hooks/{number_hook}.mp4") 
-        hook = hook.resized((720, 1080))             
+        hook = hook.resized((1080, 1920))             
         video = concatenate_videoclips([hook, video], method="compose")
         video.write_videofile(self.full_video_path.replace(".mp4", "_2_.mp4"), fps=60, logger=None)
         self.rich_console.log("Making full video done.")

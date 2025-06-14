@@ -35,7 +35,7 @@ class Subtitle:
                 interline=4
             ).with_start(start_time).with_duration(duration)
 
-            text_position = ('center', 400)
+            text_position = ('center', 640)
             subtitle_clips.append(text_clip.with_position(text_position))
 
         return subtitle_clips
