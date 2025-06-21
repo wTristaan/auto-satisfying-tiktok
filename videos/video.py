@@ -76,6 +76,7 @@ class Video():
         subtitle = Subtitle(ASSEMBLY_API, self.LANGUAGE)
         subtitle.get_srt_from_video(self.full_video_path.replace(".mp4", "_2_.mp4"))
         self.rich_console.log("Adding subtitles on full video done.")
+        return self.full_video_path
 
 
     def uploads(self):

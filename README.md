@@ -211,6 +211,29 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 
 This project is licensed under the MIT License. See the `LICENSE` file for more details.
 
+## Google Drive Branch
+
+In an effort to automate the video generation and upload process, I initially attempted to run the script on a server. However, TikTok detected the change in IP address associated with my account, which resulted in the videos no longer being promoted effectively. This led to a shadow ban, reducing the visibility of the uploaded content.
+
+To address this issue, I created the `google-drive` branch. This branch modifies the script to upload the generated videos to a specified Google Drive folder instead of directly uploading them to TikTok, YouTube, and Dailymotion. By doing so, users can manually upload the videos from Google Drive to the respective platforms, thereby avoiding potential shadow bans due to IP changes.
+
+### Setup Instructions for Google Drive
+
+1. **Activate Google Drive API:**
+   - Users need to activate the Google Drive API in the Google Cloud Console. This can be done using the same project setup for the YouTube API, simplifying the process.
+
+2. **Configure `.env` File:**
+   - Add the ID of your base Google Drive folder to the `.env` file. This folder will be used to store the generated videos.
+   - Example entry in `.env`:
+     ```plaintext
+     GDRIVE_FOLDER_ID=your_google_drive_folder_id_here
+     ```
+
+3. **Use Existing Credentials:**
+   - If you have already set up credentials for the YouTube API, you can use the same `credentials.json` file for Google Drive API access. Ensure that the Google Drive API is enabled under the same project in the Google Cloud Console.
+
+By following these steps, users can generate and store videos in their Google Drive, allowing for manual uploads to social media platforms and avoiding the issues associated with automated server uploads.
+
 ## Result video 
 
-![video generate](videos/result.gif)
+![video generate](exemple/exemple.mp4)

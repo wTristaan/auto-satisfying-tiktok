@@ -15,7 +15,7 @@ class Subtitle:
         return time_obj.hours * 3600 + time_obj.minutes * 60 + time_obj.seconds + time_obj.milliseconds / 1000
 
     @staticmethod
-    def create_subtitle_clips(subtitles, fontsize=24, color='yellow'):
+    def create_subtitle_clips(subtitles, fontsize=24, color='black'):
         subtitle_clips = []
 
         for subtitle in subtitles:
@@ -28,7 +28,7 @@ class Subtitle:
                 font_size=fontsize,
                 font="subtitles/Poppins-Medium.ttf",
                 color=color,
-                bg_color='black',
+                bg_color='white',
                 transparent=True,
                 method="caption",
                 size=(500, 100),
